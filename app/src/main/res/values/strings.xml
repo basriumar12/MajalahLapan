@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Majalah Lapan</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_current">Current</string>
+    <string name="menu_archive">Archive</string>
+    <string name="menu_announcement">Announcement</string>
+    <string name="menu_editorial_team">Editorial Team</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="front_page">Front Page</string>
+    <string name="articles">Articles</string>
+    <string name="back_pages">Back Pages</string>
+    <string name="full_paper">Full Paper</string>
+    <string name="download_pdf">Download PDF</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="view_download">View Download</string>
+    <string name="annoucement_detail">Detail</string>
+    <string name="action_notif">Push Notification</string>
+    <string name="title_activity_contoh">Contoh</string>
+    <string name="data_notfound">Data Not Found</string>
+    <string name="lembaga_penerbangan_dan_antariksa_nasional">Lembaga Penerbangan dan Antariksa Nasional</string>
+
+</resources>

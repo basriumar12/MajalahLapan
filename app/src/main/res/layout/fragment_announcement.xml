@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/main_container"
+        tools:context=".ui.announcement.AnnouncementFragment">
+
+    <FrameLayout
+            android:layout_above="@+id/announcement_footer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <!-- TODO: Update blank fragment layout -->
+        <ProgressBar
+                android:visibility="visible"
+                android:layout_gravity="center"
+                android:id="@+id/progress_bar_announcement"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_announcement"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        <TextView
+                android:visibility="gone"
+                android:id="@+id/tv_null"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/data_notfound"
+                android:textAlignment="center"/>
+
+    </FrameLayout>
+
+    <include
+            android:id="@+id/announcement_footer"
+            layout="@layout/footer"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/footer_height"/>
+</RelativeLayout>

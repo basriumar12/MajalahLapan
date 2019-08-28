@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/colorPrimaryDark">
+
+    <RelativeLayout
+            android:id="@+id/btn_updown"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:textColor="@android:color/white">
+
+        <View
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_up"/>
+
+    </RelativeLayout>
+
+    <TextView
+            android:id="@+id/tv_archive_year"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:text="This item with child"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"/>
+
+    <com.github.aakira.expandablelayout.ExpandableLinearLayout
+            android:id="@+id/expandable_archive"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_archive_year"
+            android:orientation="vertical"
+            app:ael_expanded="true"
+            app:ael_interpolator="bounce">
+
+        <android.support.v7.widget.RecyclerView
+                android:id="@+id/list_archive_child"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"/>
+
+    </com.github.aakira.expandablelayout.ExpandableLinearLayout>
+</RelativeLayout>

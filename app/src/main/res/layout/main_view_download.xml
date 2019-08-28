@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:background="@android:color/darker_gray"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <WebView
+            android:layout_above="@+id/view_buttondownload"
+            android:id="@+id/viewdownload_webview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".ui.viewdownload.ViewDownloadFragment"
+            android:nestedScrollingEnabled="true"/>
+
+    <LinearLayout
+            android:id="@+id/view_buttondownload"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:orientation="horizontal"
+            android:layout_above="@id/viewdownload_footer"
+            android:layout_marginBottom="5dp">
+
+        <View
+                android:background="@color/bg_yellow_main"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"/>
+
+        <Button
+                android:id="@+id/btn_viewdownload_download"
+                android:layout_width="0dp"
+                android:layout_weight="40"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimary"
+                android:text="@string/download_pdf"
+                android:textColor="@android:color/white"/>
+    </LinearLayout>
+
+    <include
+            android:id="@+id/viewdownload_footer"
+            layout="@layout/footer"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/footer_height"
+            android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>
