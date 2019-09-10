@@ -1,9 +1,12 @@
 package id.go.lapan.majalahlapan.ui.current.articles;
 
 import id.go.lapan.majalahlapan.data.array.current.DataCurrentDetail;
+import id.go.lapan.majalahlapan.data.remote.Api;
 import id.go.lapan.majalahlapan.data.remote.ConfigRetrofit;
+import id.go.lapan.majalahlapan.data.remote.ServiceGenerator;
 import id.go.lapan.majalahlapan.model.current.ResponseCurrent;
 import id.go.lapan.majalahlapan.ui.current.CurrentContract;
+import id.go.lapan.majalahlapan.utils.Constant;
 import org.jetbrains.annotations.NotNull;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -40,7 +43,9 @@ public class ArticlesPresenter implements CurrentContract.PresenterChild {
     public void getData(int idPart, int requestCode) {
 //        view.showProgress();
         if (requestCode == CONST_ARTICLE) {
-            ConfigRetrofit.service().requestChildArticlePages(String.valueOf(idPart)).enqueue(new Callback<List<ResponseCurrent>>() {
+            Api api = ServiceGenerator.createService(Api.class, Constant.username,Constant.pass);
+
+            api.requestChildArticlePages(String.valueOf(idPart)).enqueue(new Callback<List<ResponseCurrent>>() {
                 @Override
                 public void onResponse(@NotNull Call<List<ResponseCurrent>> call, @NotNull Response<List<ResponseCurrent>> response) {
                     view.hideProgress();

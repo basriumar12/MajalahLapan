@@ -1,6 +1,8 @@
 package id.go.lapan.majalahlapan.data.remote;
 
+import android.text.TextUtils;
 import id.go.lapan.majalahlapan.BuildConfig;
+import okhttp3.Credentials;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -32,4 +34,7 @@ public class ConfigRetrofit {
     public static Api service() {
                 return setInit().create(Api.class);
         }
+
+
+
 }

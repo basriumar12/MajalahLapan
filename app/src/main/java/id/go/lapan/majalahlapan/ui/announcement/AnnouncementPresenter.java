@@ -1,8 +1,11 @@
 package id.go.lapan.majalahlapan.ui.announcement;
 
 import android.util.Log;
+import id.go.lapan.majalahlapan.data.remote.Api;
 import id.go.lapan.majalahlapan.data.remote.ConfigRetrofit;
+import id.go.lapan.majalahlapan.data.remote.ServiceGenerator;
 import id.go.lapan.majalahlapan.model.announcement.ResponseAnnouncement;
+import id.go.lapan.majalahlapan.utils.Constant;
 import org.jetbrains.annotations.NotNull;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -21,8 +24,12 @@ public class AnnouncementPresenter implements AnnouncementContract.Presenter {
 
     @Override
     public void getDataAnnouncement(int journalID) {
+
+
+        Api api = ServiceGenerator.createService(Api.class, Constant.username,Constant.pass);
+
         view.showProgress("Loading");
-        ConfigRetrofit.service().requestDataAnnouncement(String.valueOf(journalID)).enqueue(new Callback<List<ResponseAnnouncement>>() {
+        api.requestDataAnnouncement(String.valueOf(journalID)).enqueue(new Callback<List<ResponseAnnouncement>>() {
             @Override
             public void onResponse(@NotNull Call<List<ResponseAnnouncement>> call, @NotNull Response<List<ResponseAnnouncement>> response) {
                 if (response.isSuccessful()) {

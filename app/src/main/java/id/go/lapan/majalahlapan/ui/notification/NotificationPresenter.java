@@ -2,8 +2,11 @@ package id.go.lapan.majalahlapan.ui.notification;
 
 import android.content.Context;
 import android.util.Log;
+import id.go.lapan.majalahlapan.data.remote.Api;
 import id.go.lapan.majalahlapan.data.remote.ConfigRetrofit;
+import id.go.lapan.majalahlapan.data.remote.ServiceGenerator;
 import id.go.lapan.majalahlapan.model.notification.ResponseNotification;
+import id.go.lapan.majalahlapan.utils.Constant;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -23,7 +26,9 @@ public class NotificationPresenter implements NotificationContract.Presenter {
 
     @Override
     public void getNotification(String journalID) {
-        ConfigRetrofit.service().requestNotifiicationByJournalID(journalID).enqueue(new Callback<List<ResponseNotification>>() {
+        Api api = ServiceGenerator.createService(Api.class, Constant.username,Constant.pass);
+
+        api.requestNotifiicationByJournalID(journalID).enqueue(new Callback<List<ResponseNotification>>() {
             @Override
             public void onResponse(Call<List<ResponseNotification>> call, Response<List<ResponseNotification>> response) {
                 if (response.isSuccessful()){

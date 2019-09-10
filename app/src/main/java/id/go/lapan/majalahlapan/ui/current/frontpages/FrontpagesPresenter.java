@@ -1,9 +1,12 @@
 package id.go.lapan.majalahlapan.ui.current.frontpages;
 
 import id.go.lapan.majalahlapan.data.array.current.DataCurrentDetail;
+import id.go.lapan.majalahlapan.data.remote.Api;
 import id.go.lapan.majalahlapan.data.remote.ConfigRetrofit;
+import id.go.lapan.majalahlapan.data.remote.ServiceGenerator;
 import id.go.lapan.majalahlapan.model.current.ResponseCurrent;
 import id.go.lapan.majalahlapan.ui.current.CurrentContract;
+import id.go.lapan.majalahlapan.utils.Constant;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -34,7 +37,9 @@ public class FrontpagesPresenter implements CurrentContract.PresenterChild {
     public void getData(int latestIssueID, int requestCode) {
 
         if (requestCode == CONST_FRONTPAGES) {
-            ConfigRetrofit.service().requestChildFrontPages(String.valueOf(latestIssueID)).enqueue(new Callback<List<ResponseCurrent>>() {
+            Api api = ServiceGenerator.createService(Api.class, Constant.username,Constant.pass);
+
+            api.requestChildFrontPages(String.valueOf(latestIssueID)).enqueue(new Callback<List<ResponseCurrent>>() {
                 public void onResponse(Call<List<ResponseCurrent>> call, Response<List<ResponseCurrent>> response) {
                     dataFrontPage = response.body();
                     view.onSuccessGetDataChild(response.body(), CONST_FRONTPAGES);

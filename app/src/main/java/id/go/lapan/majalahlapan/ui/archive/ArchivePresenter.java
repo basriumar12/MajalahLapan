@@ -4,9 +4,12 @@ import android.content.Intent;
 import android.text.LoginFilter;
 import android.util.Log;
 import id.go.lapan.majalahlapan.data.array.archive.DataArchive;
+import id.go.lapan.majalahlapan.data.remote.Api;
 import id.go.lapan.majalahlapan.data.remote.ConfigRetrofit;
+import id.go.lapan.majalahlapan.data.remote.ServiceGenerator;
 import id.go.lapan.majalahlapan.model.archive.ResponseArchive;
 import id.go.lapan.majalahlapan.model.archive.ResponseArchives;
+import id.go.lapan.majalahlapan.utils.Constant;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -32,8 +35,10 @@ public class ArchivePresenter implements ArchiveContract.Presenter {
 
     @Override
     public void getDataListYear() {
+        Api api = ServiceGenerator.createService(Api.class, Constant.username,Constant.pass);
+
         view.showProgress();
-        ConfigRetrofit.service().requestDataArchive().enqueue(new Callback<List<ResponseArchive>>() {
+        api.requestDataArchive().enqueue(new Callback<List<ResponseArchive>>() {
             @Override
             public void onResponse(Call<List<ResponseArchive>> call, Response<List<ResponseArchive>> response) {
                 if (response.isSuccessful()) {
@@ -56,8 +61,11 @@ public class ArchivePresenter implements ArchiveContract.Presenter {
 
     @Override
     public void getDataListYearById(String id) {
+        Api api = ServiceGenerator.createService(Api.class, Constant.username,Constant.pass);
+
         view.showProgress();
-        ConfigRetrofit.service().requestDataArchives(id).enqueue(new Callback<List<ResponseArchives>>() {
+
+        api.requestDataArchives(id).enqueue(new Callback<List<ResponseArchives>>() {
             @Override
             public void onResponse(Call<List<ResponseArchives>> call, Response<List<ResponseArchives>> response) {
                 if (response.isSuccessful()) {

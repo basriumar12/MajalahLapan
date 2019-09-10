@@ -13,9 +13,12 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import id.go.lapan.majalahlapan.data.remote.Api;
 import id.go.lapan.majalahlapan.data.remote.ConfigRetrofit;
+import id.go.lapan.majalahlapan.data.remote.ServiceGenerator;
 import id.go.lapan.majalahlapan.model.archive.ResponseArchives;
 import id.go.lapan.majalahlapan.model.last_issue.ResponseLastIssue;
+import id.go.lapan.majalahlapan.utils.Constant;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -70,14 +73,17 @@ public class HomeActivity extends AppCompatActivity {
         });
 
 
+
     }
 
     private void getLastDataIssue(String jurnalId) {
+
         ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setCancelable(false);
         progressDialog.setTitle("Load Data");
         progressDialog.show();
-        ConfigRetrofit.service().requestLastissueId(jurnalId).enqueue(new Callback<List<ResponseLastIssue>>() {
+        Api api = ServiceGenerator.createService(Api.class, Constant.username,Constant.pass);
+        api.requestLastissueId(jurnalId).enqueue(new Callback<List<ResponseLastIssue>>() {
             @Override
             public void onResponse(Call<List<ResponseLastIssue>> call, Response<List<ResponseLastIssue>> response) {
                 if (response.isSuccessful()) {
@@ -106,11 +112,13 @@ public class HomeActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<ResponseLastIssue>> call, Throwable t) {
+
                 progressDialog.dismiss();
                 Snackbar.make(main_container,"Belum Dapat Issue Id, periksa jaringan",Snackbar.LENGTH_SHORT).show();
 
-
             }
         });
+
+
     }
 }

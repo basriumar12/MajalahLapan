@@ -1,8 +1,11 @@
 package id.go.lapan.majalahlapan.ui.current.author;
 
+import id.go.lapan.majalahlapan.data.remote.Api;
 import id.go.lapan.majalahlapan.data.remote.ConfigRetrofit;
+import id.go.lapan.majalahlapan.data.remote.ServiceGenerator;
 import id.go.lapan.majalahlapan.model.current.ResponseAuthor;
 import id.go.lapan.majalahlapan.ui.current.CurrentContract;
+import id.go.lapan.majalahlapan.utils.Constant;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -21,7 +24,9 @@ public class AuthorPresenter implements CurrentContract.PresenterAuthor {
 
     @Override
     public List<ResponseAuthor> getData(String submissionID) {
-        ConfigRetrofit.service().requestAuthor(submissionID).enqueue(new Callback<List<ResponseAuthor>>() {
+        Api api = ServiceGenerator.createService(Api.class, Constant.username,Constant.pass);
+
+        api.requestAuthor(submissionID).enqueue(new Callback<List<ResponseAuthor>>() {
             @Override
             public void onResponse(Call<List<ResponseAuthor>> call, Response<List<ResponseAuthor>> response) {
                 dataAuthor = response.body();

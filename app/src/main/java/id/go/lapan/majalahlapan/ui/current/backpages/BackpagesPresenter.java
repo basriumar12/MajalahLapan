@@ -1,9 +1,12 @@
 package id.go.lapan.majalahlapan.ui.current.backpages;
 
 import id.go.lapan.majalahlapan.data.array.current.DataCurrentDetail;
+import id.go.lapan.majalahlapan.data.remote.Api;
 import id.go.lapan.majalahlapan.data.remote.ConfigRetrofit;
+import id.go.lapan.majalahlapan.data.remote.ServiceGenerator;
 import id.go.lapan.majalahlapan.model.current.ResponseCurrent;
 import id.go.lapan.majalahlapan.ui.current.CurrentContract;
+import id.go.lapan.majalahlapan.utils.Constant;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -33,7 +36,9 @@ public class BackpagesPresenter implements CurrentContract.PresenterChild {
     @Override
     public void getData(int idPart, int requestCode) {
         if (requestCode == CONST_BACKPAGES) {
-            ConfigRetrofit.service().requestChildBackPages(String.valueOf(idPart)).enqueue(new Callback<List<ResponseCurrent>>() {
+            Api api = ServiceGenerator.createService(Api.class, Constant.username,Constant.pass);
+
+            api.requestChildBackPages(String.valueOf(idPart)).enqueue(new Callback<List<ResponseCurrent>>() {
                 @Override
                 public void onResponse(Call<List<ResponseCurrent>> call, Response<List<ResponseCurrent>> response) {
                     view.onSuccessGetDataChild(response.body(), CONST_BACKPAGES);

@@ -1,8 +1,11 @@
 package id.go.lapan.majalahlapan.ui.current;
 
+import id.go.lapan.majalahlapan.data.remote.Api;
 import id.go.lapan.majalahlapan.data.remote.ConfigRetrofit;
+import id.go.lapan.majalahlapan.data.remote.ServiceGenerator;
 import id.go.lapan.majalahlapan.model.current.DataCurrent;
 import id.go.lapan.majalahlapan.model.current.ResponseCurrentNew;
+import id.go.lapan.majalahlapan.utils.Constant;
 import org.jetbrains.annotations.NotNull;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -25,8 +28,10 @@ public class CurrentPresenter implements CurrentContract.Presenter {
     @Override
     public void getDataIssue(String journalID, String issueID) {
         if (issueID != null && journalID != null) {
+            Api api = ServiceGenerator.createService(Api.class, Constant.username,Constant.pass);
+
             view.showProgress("Loading...");
-            ConfigRetrofit.service().requestDataArchivebyJournalID(journalID).enqueue(new Callback<List<ResponseCurrentNew>>() {
+            api.requestDataArchivebyJournalID(journalID).enqueue(new Callback<List<ResponseCurrentNew>>() {
                 @Override
                 public void onResponse(Call<List<ResponseCurrentNew>> call, Response<List<ResponseCurrentNew>> response) {
                     if (response.isSuccessful()) {
@@ -71,7 +76,9 @@ public class CurrentPresenter implements CurrentContract.Presenter {
     }
 
     private void getIssueByYear(String max, int issueID) {
-        ConfigRetrofit.service().requestDataIssueByYear(String.valueOf(max)).enqueue(new Callback<List<ResponseCurrentNew>>() {
+        Api api = ServiceGenerator.createService(Api.class, Constant.username,Constant.pass);
+
+        api.requestDataIssueByYear(String.valueOf(max)).enqueue(new Callback<List<ResponseCurrentNew>>() {
             @Override
             public void onResponse(@NotNull Call<List<ResponseCurrentNew>> call, @NotNull Response<List<ResponseCurrentNew>> response) {
 

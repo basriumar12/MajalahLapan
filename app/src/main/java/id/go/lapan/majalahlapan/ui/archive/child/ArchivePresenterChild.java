@@ -5,9 +5,12 @@ import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseBooleanArray;
 import id.go.lapan.majalahlapan.data.array.archive.DataArchive;
+import id.go.lapan.majalahlapan.data.remote.Api;
 import id.go.lapan.majalahlapan.data.remote.ConfigRetrofit;
+import id.go.lapan.majalahlapan.data.remote.ServiceGenerator;
 import id.go.lapan.majalahlapan.model.archive.ResponseArchive;
 import id.go.lapan.majalahlapan.ui.archive.ArchiveContract;
+import id.go.lapan.majalahlapan.utils.Constant;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.functions.Function;
@@ -49,7 +52,10 @@ public class ArchivePresenterChild extends IntentService implements ArchiveContr
     protected void onHandleIntent(Intent intent) {
         try {
             for (int index = 0; index < dataArchives.size(); index++) {
-                this.dataChild = ConfigRetrofit.service().requestDataChildArchive(dataArchives.get(index).getYear()).execute().body();
+                Api api = ServiceGenerator.createService(Api.class, Constant.username,Constant.pass);
+
+
+                this.dataChild = api.requestDataChildArchive(dataArchives.get(index).getYear()).execute().body();
                 view.onSuccessGetDataChild(dataChild, rvListChild, expandState);
             }
         } catch (IOException e) {
